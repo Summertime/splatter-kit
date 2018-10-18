@@ -4,7 +4,26 @@
 
 This will "splat" a json object into a series of variable assignments, suitable for `eval`ing or `source`ing from a shell
 
+## Warning!
+
+Prior to 1.0 there will be no promise this application is safe to use. (ONLY USE IT WITH TRUSTED SOURCES)
+
+After 1.0, there will be no promise of safety unless this application is used correctly, and potentially with `--prefix:PREFIX` set to something sane
+As a result, the API might change before a 1.0 release (e.g. adding a default prefix value)
+
 ## Examples
+
+
+### General usage
+```
+$ splat-json [-p|--prefix:PREFIX]
+```
+```bash
+# bash:
+. <( ... | splat-json )
+# posix sh:
+eval "$( ... | splat-json )"
+```
 
 ### Weather in bash!
 ```bash
