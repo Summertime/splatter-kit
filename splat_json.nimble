@@ -14,6 +14,3 @@ skipExt = @["nim"]
 
 requires "nim >= 0.18.0"
 requires "commandeer >= 0.12.0"
-
-after build:
-    cpFile "bin/splat_json", "bin/splat-json"
