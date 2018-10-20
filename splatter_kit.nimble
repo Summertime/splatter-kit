@@ -29,3 +29,8 @@ task release, "Builds a release binary":
         # "--passL:-Wl,--gc-sections",
     ].join(" ")
     exec "strip -s bin/*"
+
+task travis, "":
+    exec "nimble install -dy"
+    # exec "nimble test"
+    # exec "nimble release"
