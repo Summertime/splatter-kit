@@ -1,16 +1,12 @@
 # splatter-kit
 
-*The tool that has been made thousands of times before, now in nim!*
+[![Build Status](https://travis-ci.org/Summertime/splatter-kit.svg)](https://travis-ci.org/Summertime/splatter-kit)
 
-This will "splat" a json object into a series of variable assignments, suitable for `eval`ing or `source`ing from a shell
+`splat_json` will "splat" a json object into a series of variable assignments in a format suitable for `eval`ing or `source`ing in a posix shell
 
 ## Warning!
 
 Prior to 1.0 there will be no promise this application is safe to use (ONLY USE IT WITH TRUSTED SOURCES).
-
-After 1.0, there will be no promise of safety unless this application is used correctly, and potentially with `--prefix:PREFIX` set to something sane.
-
-As a result, the API might change before a 1.0 release (e.g. adding a default prefix value).
 
 ## Examples
 
@@ -32,15 +28,16 @@ eval "$( ... | splat_json )"
 URL='https://api.openweathermap.org/data/2.5/weather'
 APIKEY='123abc'
 . <( curl "$URL?q=London&appid=$APIKEY" | jq .main | splat_json )
-echo Current temp: $temp
+echo Current temp: $JSON_temp
 ```
 
 ### Hacker news in dash!
 ```sh
 #!/bin/sh
 HNAPI='https://hacker-news.firebaseio.com/v0'
-for ID in $( curl $HNAPI/newstories.json | jq .[] ) ; do
-	eval "$( curl $HNAPI/item/$ID.json | splat_json --prefix:HN )"
-	echo "https://news.ycombinator.com/item?id=$HNid $HNtitle submitted by $HNby"
+eval "$( curl $HNAPI/newstories.json | splat_json )"
+for ID; do
+    eval "$( curl $HNAPI/item/$ID.json | splat_json --prefix:HN_ )"
+    echo "https://news.ycombinator.com/item?id=$HN_id $HN_title submitted by $HN_by"
 done
 ```
