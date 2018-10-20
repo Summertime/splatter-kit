@@ -1,6 +1,6 @@
 import strutils
 
-version = "0.2"
+version = "0.5"
 author = "Summertime"
 description = "Deserialization for the shell"
 license = "Unlicense"

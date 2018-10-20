@@ -10,7 +10,7 @@ import commandeer
 commandline:
     option prefix, string, "prefix", "p", "JSON_"
     option noprefix, bool, "no-prefix", "n"
-    exitoption "version" ,"V", "0.2"
+    exitoption "version" ,"V", "0.5"
     exitoption "help", "h", "usage: splat-json [-p|--prefix:PREFIX]"
 
 if noprefix:
