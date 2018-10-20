@@ -32,15 +32,16 @@ eval "$( ... | splat_json )"
 URL='https://api.openweathermap.org/data/2.5/weather'
 APIKEY='123abc'
 . <( curl "$URL?q=London&appid=$APIKEY" | jq .main | splat_json )
-echo Current temp: $temp
+echo Current temp: $JSON_temp
 ```
 
 ### Hacker news in dash!
 ```sh
 #!/bin/sh
 HNAPI='https://hacker-news.firebaseio.com/v0'
-for ID in $( curl $HNAPI/newstories.json | jq .[] ) ; do
-	eval "$( curl $HNAPI/item/$ID.json | splat_json --prefix:HN )"
-	echo "https://news.ycombinator.com/item?id=$HNid $HNtitle submitted by $HNby"
+eval "$( curl $HNAPI/newstories.json | splat_json )"
+for ID; do
+    eval "$( curl $HNAPI/item/$ID.json | splat_json --prefix:HN_ )"
+    echo "https://news.ycombinator.com/item?id=$HN_id $HN_title submitted by $HN_by"
 done
 ```
