@@ -8,6 +8,7 @@ commandline:
     exitoption "help", "h", "usage: splat-json [-p|--prefix:PREFIX]"
 
 for key, val in stdin.readAll.parseJson:
-    if key != key.quoteShell():
+    let name = prefix & key
+    if name != name.quoteShell():
         continue
-    echo prefix & key & "=" & val.getStr($val).quoteShell()
+    echo name & "=" & val.getStr($val).quoteShell()
