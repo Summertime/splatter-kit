@@ -1,7 +1,7 @@
 import std / json
 import std / options
 import std / ospaths
-import std / strformat
+import std / sequtils
 import std / strutils
 
 import commandeer
@@ -13,8 +13,8 @@ commandline:
     exitoption "help", "h", "usage: splat-json [-p|--prefix:PREFIX]"
 
 
-proc cleanValue(n: JsonNode): Option[string] =
-    some n.getStr($n).quoteShell
+proc cleanValue(n: JsonNode): string =
+    n.getStr($n).quoteShell
 
 
 proc cleanKey(s: string): Option[string] =
@@ -30,8 +30,10 @@ case rootNode.kind:
         for k, v in rootNode:
             let key = cleanKey prefix & k
             let val = cleanValue v
-            if key.isNone or val.isNone:
+            if key.isNone:
                 continue
-            echo &"{key.get}={val.get}"
+            echo key.get & "=" & val
+    of JArray:
+        echo "set -- " & rootNode.elems.map(cleanValue).join(" ")
     else:
         discard
