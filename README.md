@@ -1,5 +1,7 @@
 # splatter-kit
 
+[![Build Status](https://travis-ci.org/Summertime/splatter-kit.svg)](https://travis-ci.org/Summertime/splatter-kit)
+
 *The tool that has been made thousands of times before, now in nim!*
 
 This will "splat" a json object into a series of variable assignments, suitable for `eval`ing or `source`ing from a shell
