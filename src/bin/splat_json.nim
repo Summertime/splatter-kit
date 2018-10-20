@@ -9,9 +9,12 @@ import commandeer
 
 commandline:
     option prefix, string, "prefix", "p", "JSON_"
+    option noprefix, bool, "no-prefix", "n"
     exitoption "version" ,"V", "0.2"
     exitoption "help", "h", "usage: splat-json [-p|--prefix:PREFIX]"
 
+if noprefix:
+    prefix = ""
 
 proc cleanValue(n: JsonNode): string =
     n.getStr($n).quoteShell
@@ -36,4 +39,4 @@ case rootNode.kind:
     of JArray:
         echo "set -- " & rootNode.elems.map(cleanValue).join(" ")
     else:
-        discard
+        echo "JSON=" & cleanValue rootNode
