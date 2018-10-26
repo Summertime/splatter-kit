@@ -12,12 +12,6 @@ skipExt = @["nim"]
 requires "nim >= 0.18.0"
 requires "commandeer >= 0.12.0"
 
-before build:
-    mkDir binDir / "bin"
-
-before install:
-    mkDir binDir / "bin"
-
 task travis, "":
     exec "nimble install -dy"
     # exec "nimble test"
