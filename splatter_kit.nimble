@@ -10,7 +10,6 @@ bin = @["bin/splat_json"]
 skipExt = @["nim"]
 
 requires "nim >= 0.18.0"
-requires "commandeer >= 0.12.0"
 
 task travis, "":
     exec "nimble install -dy"

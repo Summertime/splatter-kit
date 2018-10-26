@@ -4,17 +4,7 @@ import std / ospaths
 import std / sequtils
 import std / strutils
 
-import commandeer
-
-
-commandline:
-    option prefix, string, "prefix", "p", "JSON_"
-    option noprefix, bool, "no-prefix", "n"
-    exitoption "version" ,"V", "0.5"
-    exitoption "help", "h", "usage: splat-json [-p|--prefix:PREFIX]"
-
-if noprefix:
-    prefix = ""
+let prefix = "JSON_"
 
 proc cleanValue(n: JsonNode): string =
     n.getStr($n).quoteShell
