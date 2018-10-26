@@ -14,5 +14,7 @@ requires "commandeer >= 0.12.0"
 
 task travis, "":
     exec "nimble install -dy"
+    exec "nimble build"
+    exec "nimble install"
     # exec "nimble test"
     # exec "nimble release"
