@@ -1,4 +1,4 @@
-import strutils
+import ospaths
 
 version = "0.5"
 author = "Summertime"
@@ -13,22 +13,10 @@ requires "nim >= 0.18.0"
 requires "commandeer >= 0.12.0"
 
 before build:
-    mkDir "bin"
+    mkDir binDir / "bin"
 
-task release, "Builds a release binary":
-    exec [
-        "nimble",
-        "build",
-        "--define:release",
-        "--opt:speed",
-        # Some things to knock down file size
-        # Should be safe... ?
-        # "--gc:none",
-        # "--passC:-ffunction-sections",
-        # "--passC:-fdata-sections",
-        # "--passL:-Wl,--gc-sections",
-    ].join(" ")
-    exec "strip -s bin/*"
+before install:
+    mkDir binDir / "bin"
 
 task travis, "":
     exec "nimble install -dy"
